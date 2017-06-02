@@ -36,7 +36,7 @@ public class ApiController {
         log.info("ENDPOINT END");
     }
 
-    @RequestMapping(value = "/say/{conversationId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/say/{conversationId}", method = RequestMethod.POST)
     public void say(@RequestParam String conversationId, @RequestBody TextMessage message) {
         log.info("ENDPOINT START");
         log.info(message.toString());
