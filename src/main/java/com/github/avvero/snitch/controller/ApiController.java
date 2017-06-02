@@ -31,19 +31,19 @@ public class ApiController {
         echo.setRecipient(message.getFrom());
         echo.setServiceUrl(message.getServiceUrl());
         echo.setType("message");
-        echo.setText("<ss type=\"hi\">(wave)</ss>");
+        echo.setText("<ss type=\"hi\">(wave)</ss> hi everybody, i'm happy to join this conversation, " +
+                "channel id is " + message.getConversation().getId());
         botFrameworkService.send(echo);
         log.info("ENDPOINT END");
     }
 
     @RequestMapping(value = "/say/{conversationId}", method = RequestMethod.POST)
-    public void say(@RequestParam String conversationId, @RequestBody TextMessage message) {
+    public void say(@PathVariable String conversationId, @RequestBody TextMessage message) {
         log.info("ENDPOINT START");
         log.info(message.toString());
 
         ConversationMessage echo = new ConversationMessage();
         echo.setConversation(new ConversationAccount(null, conversationId, null));
-        echo.setServiceUrl("https://skype.botframework.com");
         echo.setType("message");
         echo.setText(message.getText());
         botFrameworkService.send(echo);
